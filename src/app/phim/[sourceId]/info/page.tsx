@@ -32,7 +32,7 @@ export default async function MovieInfo({params,searchParams}:{
           </div>
           <div className='flex flex-wrap justify-center items-center gap-4 my-8'>
             {data.episode?.map((chapter:any,index:number)=>(
-              <Button asChild>
+              <Button asChild key={index}>
                 <Link href={`/phim/${source}/xem?id=${chapter.slug}`}>
                   {chapter.title}
                 </Link>

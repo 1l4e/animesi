@@ -20,7 +20,7 @@ searchParams: {
   return (
     <div>
         {data?.map((section:any,index:number)=> (
-            <div>
+            <div key={index}>
                 <h1 className="text-2xl ">{section.title}</h1>
                 <Link href={`/phim/${sources.id}/category?id=${section.slug}`}>Xem Thêm</Link>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 gap-4 lg:p-8 p-1 pt-6">
