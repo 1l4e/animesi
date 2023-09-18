@@ -26,7 +26,7 @@ export default async function MovieInfo({params,searchParams}:{
           <>
           <div className='player w-full h-full flex justify-center'> 
           {iff.type === 'iframe' &&(
-            <iframe className='w-full h-full min-h-[80vh]' src={iff.embed_url} allowFullScreen>
+            <iframe className='w-full h-full min-h-[60vh]' src={iff.embed_url} allowFullScreen>
             </iframe>
           )}
           </div>

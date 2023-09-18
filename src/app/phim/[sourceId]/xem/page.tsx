@@ -30,7 +30,7 @@ export default async function MovieXem({
           <div className="player w-full h-full flex justify-center">
             {iff.type === "iframe" && (
               <iframe
-                className="w-full h-full min-h-[80vh]"
+                className="w-full h-full min-h-[60vh]"
                 src={iff.embed_url}
                 allowFullScreen
               ></iframe>
