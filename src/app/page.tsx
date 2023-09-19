@@ -1,21 +1,16 @@
-import {getServerSession} from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import Link from 'next/link';
+import { findManySources } from "@/action/SourceModel"
+import Phim from "./phim/[sourceId]/page";
 
-export default async function Home() {
-  const session = await getServerSession(authOptions);
+export default async function Home({searchParams}:any) {
+  const sources = await findManySources();
+  const params = {
+    sourceId: sources[0].id.toString()
+  }
   return (
     <div className="flex flex-wrap flex-col w-full justify-center items-center">
+      
+      <Phim params={params} searchParams={searchParams}/>
    
-      <Link href="/dashboard" >
-       Dashboard
-      </Link>
-      <Link href="/dashboard/admin" >
-       Admin
-      </Link>
-      <h1>Session</h1>
-{/*     <pre >{JSON.stringify(session,null,4)}</pre> */}
-    
     </div>
   )
 }

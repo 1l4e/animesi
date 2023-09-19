@@ -1,7 +1,7 @@
-import { fetchData } from "@/action/fetch";
+import { findOneSource } from "@/action/SourceModel";
+import { fetchMovieInfo } from "@/action/fetch";
 import NotFound from "@/app/not-found";
 import { Button } from "@/components/ui/button";
-import { home } from "@/lib/constant";
 import Link from "next/link";
 import React from "react";
 
@@ -18,10 +18,17 @@ export default async function MovieXem({
   if (!source || !id) {
     return <NotFound title="Check ID/ Source" />;
   }
-
-  const url = `${home}/api/movie/info?id=${source}&movie=${id}`;
-
-  const data = await fetchData(url, "no-cache");
+  const sources = await findOneSource(params.sourceId)
+  if (!sources){
+      return <NotFound title="Source Not Found" />
+  }
+  const search = {
+    movie:id
+  }
+  const data = await fetchMovieInfo(sources, search);
+  if (!data){
+    return <>Not Found</>
+  }
   const iff = data?.watch[0];
   return (
     <div className="flex flex-col justify-center items-center w-full">

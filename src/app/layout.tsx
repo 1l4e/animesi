@@ -28,7 +28,7 @@ export default async function RootLayout({
         <header>
         <MainMenuMobile safe={safe}/>
         </header>
-        <main className="flex min-h-screen flex-col items-center bg-dotted pb-24">
+        <main className="flex min-h-screen flex-col items-center bg-dotted py-24">
         {children}
         </main>
         </NextAuthProvider>

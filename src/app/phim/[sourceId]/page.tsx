@@ -1,7 +1,6 @@
 import { findOneSource } from "@/action/SourceModel"
-import { fetchData } from "@/action/fetch"
+import {  fetchSource } from "@/action/fetch"
 import NotFound from "@/app/not-found"
-import { home } from "@/lib/constant"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 
@@ -15,8 +14,15 @@ searchParams: {
     if (!sources){
         return <NotFound title="Source Not Found" />
     }
-    const data = await fetchData(`${home}/api/movie/source?id=${sources.id}`,'no-cache')
-
+    const search = {
+      page: 1,
+      search: "",
+      category: "",
+    }
+    const data = await fetchSource(sources,search)
+    if (!data){
+      return <>Not Found</>
+    }
   return (
     <div>
         {data?.map((section:any,index:number)=> (
@@ -27,7 +33,7 @@ searchParams: {
               {section?.movies.map((item: any, index: number) => (
                  <div className="" key={index}>
                  <div className="overflow-hidden rounded-md relative">
-                   <Link href={`${sources.id}/info?id=${item.slug}`}>
+                   <Link href={`/phim/${sources.id}/info?id=${item.slug}`}>
                     <span className="absolute top-0 right-0 bg-green-500 px-4 py-2">{item.latest}</span>
                      <img
                        src={`${item.image}`}
